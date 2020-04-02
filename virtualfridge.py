@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for
-
+from forms import LoginForm
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '2a029ad143be63daaa6fd66e'
 
 
 @app.route("/")
@@ -31,3 +32,7 @@ def popular():
 def help():
     return render_template('help.html', title='Help')
 
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Login', form=form)
