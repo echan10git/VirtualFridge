@@ -36,3 +36,8 @@ def help():
 def login():
     form = LoginForm()
     return render_template('login.html', title='Login', form=form)
+
+@app.route("/registration", methods=['GET', 'POST'])
+def registration():
+    form = RegistrationForm()
+    return render_template('registration.html', title='Registration', form=form)
