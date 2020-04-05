@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
-from flask_mail inport Message
-from app import mall
+from flask_mail import Message
+# from app import mall
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
