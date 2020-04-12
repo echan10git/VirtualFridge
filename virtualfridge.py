@@ -1,12 +1,11 @@
-from flask import Flask, render_template, url_for
-from forms import LoginForm
-from forms import RegistrationForm
+from flask import Flask, render_template, url_for, request
+from forms import LoginForm, RegistrationForm
 from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app import routes, models
-from flask_login import LoginManager
-from flask_login import logout_user
+from flask_login import LoginManager, logout_user, login_required
+from werkzeug.urls import url_parse
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '2a029ad143be63daaa6fd66e'
@@ -68,5 +67,13 @@ def logout():
 
 @app.route("/registration", methods=['GET', 'POST'])
 def registration():
+    if current_user.is_authenticated: 
+        return redirect(url_for('home'))
     form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flask('Congratulations, you are now registered!')
     return render_template('registration.html', title='Registration', form=form)
