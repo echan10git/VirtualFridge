@@ -28,7 +28,14 @@
                 <li><a href="{{ url_for('help') }}">Help</a></li>
             </ul>
             <ul class ="nav navbar-nav navbar-right">
-                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Username </a></li>
+                  <li>
+                    <span class="glyphicon glyphicon-user"></span>
+                    {% if false %}
+                      <a href="#"> Username </a>
+                        {% else %}
+                        <a href="{{ url_for('login') }}"> Login </a>
+                        {% endif %}
+                    </li>
     </ul>
   </div>
 </nav>
