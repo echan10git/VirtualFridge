@@ -51,6 +51,20 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Login', form=form)
 
+@app.route("/registration", methods=['GET','POST'])
+def registration():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Registration complete!')
+        return redirect(url_for('login'))
+    return render_template('registration.html', title="Registration", form=form)
+
 @app.route('/logout')
 def logout():
     logout_user()

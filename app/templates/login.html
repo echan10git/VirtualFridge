@@ -20,10 +20,7 @@
         </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
+        <p>New user? <a href="{{url_for('registration')}}">Click to Register!</a></p>
     </form>
 </div>
-
-
-
-
 {% endblock content %}

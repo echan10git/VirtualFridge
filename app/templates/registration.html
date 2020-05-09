@@ -5,16 +5,9 @@ f{% extends "layout.html" %}
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.firstName.label }}<br>
-            {{ form.firstName(size=32) }}<br>
-            {% for error in form.firstName.errors%}
-            <span style = "color: red;"></span>[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.lastName.label }}<br>
-            {{ form.lastName(size=32) }}<br>
-            {% for error in form.lastName.errors%}
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors%}
             <span style = "color: red;"></span>[{{ error }}]</span>
             {% endfor %}
         </p>
@@ -26,25 +19,21 @@ f{% extends "layout.html" %}
             {% endfor %}
         </p>
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors%}
-            <span style = "color: red;"></span>[{{ error }}]</span>
+
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.username.errors%}
-            <span style = "color: red;"></span>[{{ error }}]</span>
+            {{ form.password2.label }}<br>
+            {{ form.password2(size=32) }}<br>
+            {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
-</div>
-
-
-
 
 {% endblock content %}
