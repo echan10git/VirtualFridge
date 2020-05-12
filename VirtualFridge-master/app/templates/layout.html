@@ -27,16 +27,16 @@
                 <li><a href="{{ url_for('popular') }}">Popular</a></li>
                 <li><a href="{{ url_for('help') }}">Help</a></li>
             </ul>
-            <ul class ="nav navbar-nav navbar-right">
-                  <li>
-                    {% if current_user.is_anonymous %}
-                    <a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-user"></span> Login </a>
-                    {% else %}
-                      <a href="#"><span class="glyphicon glyphicon-user"></span> {{ current_user.username }} </a>
-                      <a href="{{ url_for('logout') }}">Logout</a>
-                        {% endif %}
-                    </li>
-    </ul>
+            {% if current_user.is_anonymous %}
+                <ul class ="nav navbar-nav navbar-right">
+                    <li> <a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login </a> </li>
+                </ul>
+            {% else %}
+                <ul class ="nav navbar-nav navbar-right">
+                    <li> <a href="{{ url_for('user', username=current_user.username) }}"><span class="glyphicon glyphicon-user"></span> {{ current_user.username }} </a> </li>
+                    <li> <a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>
+                </ul>
+            {% endif %}
   </div>
 </nav>
 </header>
