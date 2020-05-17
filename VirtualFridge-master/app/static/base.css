@@ -4,6 +4,11 @@
     border-color: #2d545e;
 }
 
+.username-text{
+    padding-left: 2%;
+    padding-top: 4%;
+}
+
 .grad {
   background-image: linear-gradient(to right, #00f260 , #0575e6);
   height: inherit;
