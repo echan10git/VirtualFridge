@@ -2,8 +2,8 @@ from flask import render_template, flash, redirect, url_for, request, g, current
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import db
-from app.main.forms import EditProfileForm, EmptyForm, SearchForm
-from app.models import User, Fridges, Recipes, RecipeIngredients, Ingredients, Link
+from app.main.forms import EditProfileForm, EmptyForm, SearchForm, RecipeForm, AddIngredientsForm
+from app.models import User, Fridges, Recipes, RecipeIngredients, Ingredients, Link, Linktwo
 from app.main import bp
 
 @bp.before_app_request
@@ -29,8 +29,10 @@ def myfridge():
     return render_template('myfridge.html', title='My Fridge')
 
 @bp.route("/submit")
+@login_required
 def submit():
-    return render_template('submit.html', title='Submit')
+    form = RecipeForm()
+    return render_template('submit.html', title='Add a Recipe', form=form)
 
 @bp.route("/popular")
 def popular():
@@ -55,6 +57,16 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+@bp.route('/addingredientstest')
+def addingredientstest():
+    form = AddIngredientsForm()
+    if form.validate_on_submit():
+        addition = Ingredients(knownIngredients = form.ingredient.data)
+        db.session.add(addition)
+        db.session.commit()
+        return redirect(url_for('main.addingredientstest'))
+    return render_template('addingredientstest.html', title = 'Add Ingredients', form=form)
+
 @bp.route('/user/<username>')
 @login_required
 def user(username):
@@ -72,4 +84,17 @@ def search():
     prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
         if page > 1 else None
     return render_template('search.html', title='Search', recipe=recipe,
+                           next_url=next_url, prev_url=prev_url)
+
+@bp.route('/addingredients')
+def addingredients():
+    if not g.search_form.validate():
+        return redirect(url_for('main.home'))
+    page = request.args.get('page', 1, type = int)
+    ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
+    next_url = url_for('main.addingredients', q=g.search_form.q.data, page=page + 1) \
+        if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
+    prev_url = url_for('main.addingredients', q=g.search_form.q.data, page=page - 1) \
+        if page > 1 else None
+    return render_template('addingredients.html', title='Add Ingredients', ingredient=ingredient,
                            next_url=next_url, prev_url=prev_url)

@@ -33,4 +33,14 @@ class SearchForm(FlaskForm):
             kwargs['csrf_enabled'] = False
         super(SearchForm, self).__init__(*args, **kwargs)
 
+class RecipeForm(FlaskForm):
+    ingredient = StringField('Ingredient', validators=[DataRequired()])
+    steps = TextAreaField('Steps', validators = [Length(min=0, max = 140)])
+    add = SubmitField('')
+    submit = SubmitField('Done!')
+
+class AddIngredientsForm(FlaskForm):
+    ingredient = StringField('Ingredient', validators=[DataRequired()])
+    submit = SubmitField('Add')
+
 

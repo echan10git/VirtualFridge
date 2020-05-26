@@ -87,7 +87,7 @@ def load_user(id):
 class Fridges(db.Model):
     __tablename__ = 'fridges'
     id = db.Column(db.Integer, primary_key=True)
-    currentingredients = db.relationship('ingredients', secondary='linktwo')
+    currentingredients = db.relationship('Ingredients', secondary='linktwo')
     quantity = db.Column(db.Integer, index = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     def addingredients(self, ingredients):
@@ -98,10 +98,6 @@ class Fridges(db.Model):
             self.currentingredients.remove(ingredients)
     def is_using(self, ingredients):
         return self.currentingredients.filter(link.c.ingredients_id == ingredients.id).count() > 0
-    def showingredients(self):
-        return self.query.join(link, (self.id == RecipeIngredients.recipe_id)).filter(
-            Link.c.recipeingredients_id == RecipeIngredients.recipe_id).order_by(
-            Recipe.likes.desc())
     def _repr_(self):
         return '<Fridges {}>'.format(self.ingredient)
 
@@ -134,10 +130,11 @@ class RecipeIngredients(db.Model):
     def is_using(self, ingredients):
         return self.usedingredients.filter(link.c.ingredients_id == ingredients.id).count() > 0
 
-class Ingredients(db.Model):
+class Ingredients(SearchableMixin, db.Model):
+    __searchable__ = ['knownIngredients']
     __tablename__ = 'ingredients'
     id = db.Column(db.Integer, primary_key = True)
-    knownIngredients = db.Column(db.String(140))
+    knownIngredients = db.Column(db.String(140), unique=True)
     recipeingredient = db.relationship('RecipeIngredients', secondary='link')
     fridgeingredients = db.relationship('Fridges', secondary='linktwo')
 

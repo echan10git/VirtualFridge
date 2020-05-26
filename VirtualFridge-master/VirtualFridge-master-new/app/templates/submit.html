@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div>
+    <h1> Add Your Own Recipe! </h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.ingredient.label }} <br> 
+            {{ form.ingredient(size=32) }}<br>
+            {% for error in form.ingredient.errors%}
+            <span style = "color: red;"></span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p> {{ form.add() }} </p>
+        <p>
+            {{ form.steps.label }}<br>
+            {{ form.steps(cols=50, rows=4) }}<br>
+            {% for error in form.steps.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p> {{ form.submit() }} </p>
+    </form>
+</div>
+
+{% endblock %}

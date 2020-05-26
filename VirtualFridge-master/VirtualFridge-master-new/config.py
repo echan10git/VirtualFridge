@@ -18,4 +18,4 @@ class Config(object):
     ADMINS = ['echan10@stuy.edu', 'fmiah10@stuy.edu']
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     RECIPES_PER_PAGE = 10
-
+    INGREDIENTS_PER_PAGE = 10

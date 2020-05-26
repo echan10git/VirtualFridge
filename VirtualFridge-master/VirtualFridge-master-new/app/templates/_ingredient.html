@@ -2,9 +2,9 @@
     <tr>
         <td>
             <span id="ingredient{{ ingredient.id }}">
-                {{ ingredient.knownIngredients }}
+                {{ ingredients.knownIngredients }}
                 <br>
-                <button name="addBtn" onclick="{{ current_user.fridges.addIngredient(self, ingredient.knownIngredients )}}">Add</button>
+                <button name="addBtn" onclick="{{ current_user.fridges.addingredients(self, ingredient.knownIngredients )}}">Add</button>
             </span>
         </td>
     </tr>
