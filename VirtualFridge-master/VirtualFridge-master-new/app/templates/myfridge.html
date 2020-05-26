@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block app_content %}
+    <h1> My Food </h1>
+    <!--{% for food in foods %}
+    <p>
+    <b>Food: </b>{{ food.name }}   Amount: <b>{{ food.amount }}</b> {{ food.measurment }}
+    </p>
+    {% endfor %}-->
+    <h1>Add a New Food!</h1> 
+    <!--<form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}-->
+    <h1>{{ _('Search Results') }}</h1>
+    {% for ingredient in ingredients %}
+        {% include '_ingredient.html' %}
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span>
+                    {{ _('Previous results') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    {{ _('Next results') }}
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+        <!--<p> 
+            {{ form.amount.label }}<br>
+            {{ form.amount(size=32) }}<br>
+        </p>
+        <p>
+            {{ form.measurment.label }}<br>
+            {{ form.measurment(size=32) }}<br>
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>-->
+
+{% endblock %}
