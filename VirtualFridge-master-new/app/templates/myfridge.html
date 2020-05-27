@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div>
+    <h2 class="recipe-search">Ingredient Search</h2>
+    {% if g.search_form %}
+    <form class="navbar-form navbar-left search-bar" method="get"
+            action="{{ url_for('main.addingredients') }}">
+        <div class="form-group">
+            {{ g.search_form.q(size=20, class='form-control',
+                    placeholder=g.search_form.q.label.text) }}
+        </div>
+    </form>
+    {% endif %}
+</div>
+
+    
+{% endblock %}

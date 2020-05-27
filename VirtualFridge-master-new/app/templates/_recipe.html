@@ -1,4 +1,6 @@
-    <table class="table table-hover">
+{% extends "layout.html" %}
+{% block content %}
+   <table class="table table-hover">
         <tr>
             <td width="70px">
                 <a href="{{ url_for('main.user', username=recipes.author.username) }}">
@@ -12,9 +14,12 @@
                     </a>
                 {% endset %}
                 <br>
-                <span id="recipe{{ recipes.id }}">{{ recipes.body }}</span>
+                <span id="recipes{{ recipes.id }}">
+                    {{ recipes.title }} <br>
+                    {{ recipes.body }}</span>
                 <br><br>
                 {% endif %}
             </td>
         </tr>
     </table>
+

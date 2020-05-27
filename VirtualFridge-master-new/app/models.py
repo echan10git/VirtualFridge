@@ -87,9 +87,17 @@ def load_user(id):
 class Fridges(db.Model):
     __tablename__ = 'fridges'
     id = db.Column(db.Integer, primary_key=True)
-    ingredient = db.Column(db.String(140), index = True)
+    currentingredients = db.relationship('Ingredients', secondary='linktwo')
     quantity = db.Column(db.Integer, index = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    def addingredients(self, ingredients):
+        if not self.is_using(ingredients):
+            self.currentingredients.append(ingredients)
+    def removeingredients(self, ingredients):
+        if self.is_using(ingredients):
+            self.currentingredients.remove(ingredients)
+    def is_using(self, ingredients):
+        return self.currentingredients.filter(link.c.ingredients_id == ingredients.id).count() > 0
     def _repr_(self):
         return '<Fridges {}>'.format(self.ingredient)
 
@@ -122,14 +130,25 @@ class RecipeIngredients(db.Model):
     def is_using(self, ingredients):
         return self.usedingredients.filter(link.c.ingredients_id == ingredients.id).count() > 0
 
-class Ingredients(db.Model):
+class Ingredients(SearchableMixin, db.Model):
+    __searchable__ = ['knownIngredients']
     __tablename__ = 'ingredients'
     id = db.Column(db.Integer, primary_key = True)
-    knownIngredients = db.Column(db.String(140))
+    knownIngredients = db.Column(db.String(64), index=True, unique=True)
     recipeingredient = db.relationship('RecipeIngredients', secondary='link')
+    fridgeingredients = db.relationship('Fridges', secondary='linktwo')
+
+    def __init__(self, inputingredient):
+        self.knownIngredients = inputingredient
 
 class Link(db.Model):
     __tablename__ = 'link'
     recipeingredients_id = db.Column(db.Integer, db.ForeignKey('recipeingredients.id'), primary_key = True)
     ingredients_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'), primary_key = True)
+
+class Linktwo(db.Model):
+    __tablename__ = 'linktwo'
+    fridges_id = db.Column(db.Integer, db.ForeignKey('fridges.id'), primary_key = True)
+    ingredients_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'), primary_key = True)
+
 
