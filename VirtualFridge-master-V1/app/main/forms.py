@@ -1,7 +1,7 @@
 from flask import request
 from flask_wtf import FlaskForm
 from flask_babel import lazy_gettext as _1
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User, Ingredients
 # from app import mall
@@ -39,7 +39,7 @@ class RecipeForm(FlaskForm):
     amount = StringField('Amount', validators=[DataRequired()])
     step = TextAreaField('Step',validators=[DataRequired()])
     hasDiet = StringField('Is there a special diet associated with this recipe? (If none, write N/A)', validators=[DataRequired()])
-    spiceLevel = StringField('How spicy is your recipe on a scale of 1 to 5?', validators=[DataRequired()])
+    spiceLevel = IntegerField('How spicy is your recipe on a scale of 1 to 5?', validators=[DataRequired()])
     submit = SubmitField('Done!')
 
 class AddIngredientsForm(FlaskForm):

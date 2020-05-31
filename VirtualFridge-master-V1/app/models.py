@@ -108,6 +108,8 @@ class Recipes(SearchableMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(140))
     body = db.Column(db.Text)
+    diet = db.Column(db.String(140))
+    spiceLevel = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     RecipeIngredient = db.relationship('RecipeIngredients', backref='recipeorigin', lazy = 'dynamic')
     def showingredients(self):

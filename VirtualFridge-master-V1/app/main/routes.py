@@ -28,10 +28,14 @@ def recipe_search():
 def myfridge():
     return render_template('myfridge.html', title='My Fridge')
 
-@bp.route("/submit", methods=["POST"])
+@bp.route("/submit", methods=['GET', 'POST'])
 @login_required
 def submit():
     form = RecipeForm()
+    if form.validate_on_submit():
+            recipe = Recipe(title = form.title.data, body = form.step.data, diet = form.hasDiet.data, spiceLevel = form.spiceLevel.data, user_id = current_user.id)
+            db.session.add(recipe)
+            db.session.commit()
     return render_template('recipe.html', title='Add a Recipe', form=form)
 
 @bp.route("/popular")
@@ -88,13 +92,17 @@ def search():
 
 @bp.route('/addingredients')
 def addingredients():
+    if g.search_form.validate():
+        if not current_app.elasticsearch:
+            return redirect(url_for('main.home'))
+        else:
+            return redirect(url_for('addingredientstest.html'))
     if not g.search_form.validate():
-        return redirect(url_for('main.home'))
-    page = request.args.get('page', 1, type = int)
-    ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
-    next_url = url_for('main.addingredients', q=g.search_form.q.data, page=page + 1) \
-        if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
-    prev_url = url_for('main.addingredients', q=g.search_form.q.data, page=page - 1) \
-        if page > 1 else None
-    return render_template('addingredients.html', title='Add Ingredients', ingredient=ingredient,
-                           next_url=next_url, prev_url=prev_url)
+        page = request.args.get('page', 1, type = int)
+        ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
+        next_url = url_for('main.addingredients', q=g.search_form.q.data, page=page + 1) \
+            if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
+        prev_url = url_for('main.addingredients', q=g.search_form.q.data, page=page - 1) \
+            if page > 1 else None
+        return render_template('addingredients.html', title='Add Ingredients', ingredient=ingredient,
+                            next_url=next_url, prev_url=prev_url)

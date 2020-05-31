@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
-
 {% block content %}
-<br> 
-<br> 
+<br>
+<br>
 <br>
 <div>
 <center>
@@ -17,14 +16,13 @@
             {% endfor %}
         </p>
         <p> <h3><b>Ingredients</b></h3> </p>
-        <ul class="ingredientsList">
-            <li class="ingredient"> 
+        <ul class="ingredientsList" style="list-style-type: none;">
+            <li id="ingredient1">
             {{ form.ingredient.label }}
             {{ form.ingredient(size = 20) }}
             {% for error in form.ingredient.errors%}
             <span style = "color: red;"></span>[{{ error }}]</span>
             {% endfor %}
-
             {{ form.amount.label }}
             {{ form.amount(size = 10) }}
             {% for error in form.amount.errors%} <br>
@@ -32,17 +30,18 @@
             {% endfor %}
             </li>
         </ul>
-
-
-        
         <button onclick="addIngredient()">Add Ingredient</button>
-        <!-- <script> 
+        {% block javascript %}
+        <script>
             function addIngredient() {
-                // let ingredientDev = document.querySelector('.ingredient');
-                // document.querySelector('.ingredientsList').appendChild(ingredientDev);
-                console.log('it worked');
+                let list = document.querySelector('.ingredientsList');
+                let clone = list.firstElementChild.cloneNode(true);
+                clone.childNodes[3].value = "";
+                clone.childNodes[7].value = "";
+                list.appendChild(clone);
             }
-        </script> -->
+        </script>
+        {% endblock %}
         <p> <h3><b>Steps</b></h3> </p>
         <p>
             {{ form.step(cols=50, rows=4) }}<br>
@@ -50,24 +49,22 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p> 
-            {{ form.hasDiet.label }} 
+        <p>
+            {{ form.hasDiet.label }}
             {{ form.hasDiet(size=10) }} <br>
             {% for error in form.hasDiet.errors%}
             <span style = "color: red;"></span>[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p> 
-            {{ form.spiceLevel.label }} 
+        <p>
+            {{ form.spiceLevel.label }}
             {{ form.spiceLevel(size=1) }}
             {% for error in form.spiceLevel.errors%}
             <span style = "color: red;"></span>[{{ error }}]</span>
             {% endfor %}
-
         </p>
         <p> {{ form.submit() }} </p>
     </form>
 </center>
 </div>
-
 {% endblock %}
