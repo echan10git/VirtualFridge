@@ -34,9 +34,12 @@ class SearchForm(FlaskForm):
         super(SearchForm, self).__init__(*args, **kwargs)
 
 class RecipeForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
     ingredient = StringField('Ingredient', validators=[DataRequired()])
-    steps = TextAreaField('Steps', validators = [Length(min=0, max = 140)])
-    add = SubmitField('')
+    amount = StringField('Amount', validators=[DataRequired()])
+    step = TextAreaField('Step',validators=[DataRequired()])
+    hasDiet = StringField('Is there a special diet associated with this recipe? (If none, write N/A)', validators=[DataRequired()])
+    spiceLevel = StringField('How spicy is your recipe on a scale of 1 to 5?', validators=[DataRequired()])
     submit = SubmitField('Done!')
 
 class AddIngredientsForm(FlaskForm):

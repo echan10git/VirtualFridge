@@ -28,11 +28,11 @@ def recipe_search():
 def myfridge():
     return render_template('myfridge.html', title='My Fridge')
 
-@bp.route("/submit")
+@bp.route("/submit", methods=["POST"])
 @login_required
 def submit():
     form = RecipeForm()
-    return render_template('submit.html', title='Add a Recipe', form=form)
+    return render_template('recipe.html', title='Add a Recipe', form=form)
 
 @bp.route("/popular")
 def popular():
