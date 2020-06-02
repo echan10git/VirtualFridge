@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
-{% block style %}
+<!--{% block style %}
 grad
-{% endblock style %}
+{% endblock style %}-->
 {% block content %}
+
+<body style="font-family: 'Quicksand', sans-serif;">
 <div class="container-fluid welcome-text white-text grad">
     <h1>Ingredients You Own, Recipes You'll Love</h1>
     <h3>Professional and User-Submitted<br>
@@ -13,4 +15,6 @@ grad
     <h3> OR </h3>
     <a href="{{url_for('auth.login')}}" class="btn btn-primary btn-lg active register-button" role="button" aria-pressed="true">Go to My Account Now!</a>
 </div>
+</body> 
+
 {% endblock content %}

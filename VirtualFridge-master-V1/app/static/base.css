@@ -1,5 +1,5 @@
 .navbar-custom {
-    background-color: #ff0a0a;
+    background-color: #00dbf8;
     color: #ffffff; 
     border-color: #0575e6;
 }
@@ -82,4 +82,9 @@
 .recipe-search{
     padding-top: 10%;
     text-align: center;
+}
+
+body{
+    background-image: url('https://iili.io/JOH0HQ.png');
+    font-family: 'Quicksand', sans-serif;
 }
