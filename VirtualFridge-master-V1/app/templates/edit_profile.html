@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="welcome-text">>
+<body>
+<div class="welcome-text">
     <h1>Edit Profile</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -13,6 +14,9 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.diet.label }}<br>
+            {{ form.diet(size=32) }}<br>
+        <p>
             {{ form.about_me.label }}<br>
             {{ form.about_me(cols=50, rows=4) }}<br>
             {% for error in form.about_me.errors %}
@@ -22,4 +26,5 @@
         <p>{{ form.submit() }}</p>
     </form>
 </div>
+</body>
 {% endblock %}

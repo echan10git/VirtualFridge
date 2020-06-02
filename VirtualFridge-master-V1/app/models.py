@@ -52,6 +52,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index = True, unique = True)
     email = db.Column(db.String(120), index = True, unique = True)
     about_me = db.Column(db.String(140))
+    diet = db.Column(db.String(64))
     password_hash = db.Column(db.String(128))
     fridge = db.relationship('Fridges', backref='author', lazy = 'dynamic')
     recipe = db.relationship('Recipes', backref='author', lazy = 'dynamic')

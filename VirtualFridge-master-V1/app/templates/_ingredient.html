@@ -4,7 +4,7 @@
             <span id="ingredient{{ ingredient.id }}">
                 {{ ingredients.knownIngredients }}
                 <br>
-                <button name="addBtn" onclick="{{ current_user.fridges.addingredients(self, ingredient.knownIngredients )}}">Add</button>
+            <button name="addBtn" onclick="{{ url_for(main.add, ingredient=ingredients) }}">Add</button>
             </span>
         </td>
     </tr>

@@ -1,26 +1,26 @@
 {% extends "layout.html" %}
 
-{% block app_content %}
-    <h1>{{ _('Search Results') }}</h1>
+{% block content %}
+<div class="welcome-text">
+    <h1>Search Results</h1>
     {% for ingredients in ingredient %}
         {% include '_ingredient.html' %}
-        <br>
-        <button onclick="current_user.Fridges.addingredients(ingredients)">Add</button> 
     {% endfor %}
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
                     <span aria-hidden="true">&larr;</span>
-                    {{ _('Previous results') }}
+                    Previous results
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
                 <a href="{{ next_url or '#' }}">
-                    {{ _('Next results') }}
+                    Next results
                     <span aria-hidden="true">&rarr;</span>
                 </a>
             </li>
         </ul>
     </nav>
+</div>
 {% endblock %}

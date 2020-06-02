@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+
 {% block content %}
 <div class="username-text">
     <table>
@@ -6,13 +7,27 @@
             <td><h1>User: {{ user.username }}</h1></td>
         </tr>
         <tr>
-            <td><img src="{{ user.avatar(220) }}"></td>
-            <td class="about-me">{% if user.about_me %} <p>{{ user.about_me }}</p> {% endif %}</td>
+            <td><center><img src="{{ user.avatar(150) }}"></center></td>
+            <td class="about-me">
+                <h4><b>About me</b></h4>
+                {% if user.about_me %} <p><h4>{{ user.about_me }}</h4></p> {% endif %} <br> 
+                <h4><b>My Special Diet</b></h4>
+                {% if user.diet %} <p><h4>{{ user.diet }}</h4></p> {% endif %}
+            </td>
+        </tr>
+        <tr> 
+            <td> 
+                <br>
+                <center>
+                {% if user == current_user %}
+                <p><a href="{{ url_for('main.edit_profile') }}" class="btn btn-primary btn-lg active scanner-button" role="button" aria-pressed="true">Edit profile</a></p>
+                {% endif %}
+                </center>
+            </td>
+            <td> </td>
         </tr>
     </table>
-    {% if user== current_user %}
-    <p><a href="{{ url_for('edit_profile') }}">Edit profile</a></p>
-    {% endif %}
+    <br>
 </div>
     <hr>
     <p>

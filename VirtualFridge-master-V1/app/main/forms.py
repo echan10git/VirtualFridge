@@ -9,6 +9,7 @@ from app.models import User, Ingredients
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     about_me = TextAreaField('About me', validators = [Length(min=0, max = 140)])
+    diet = StringField('Diet', validators = [Length(min=0, max = 140)])
     submit = SubmitField('Submit')
     def __init__(self, original_username, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
@@ -35,12 +36,10 @@ class SearchForm(FlaskForm):
 
 class RecipeForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    ingredient = StringField('Ingredient', validators=[DataRequired()])
-    amount = StringField('Amount', validators=[DataRequired()])
     step = TextAreaField('Step',validators=[DataRequired()])
     hasDiet = StringField('Is there a special diet associated with this recipe? (If none, write N/A)', validators=[DataRequired()])
     spiceLevel = IntegerField('How spicy is your recipe on a scale of 1 to 5?', validators=[DataRequired()])
-    submit = SubmitField('Done!')
+    submit = SubmitField('Add Ingredients!')
 
 class AddIngredientsForm(FlaskForm):
     ingredient = StringField('Ingredient', validators=[DataRequired()])

@@ -33,9 +33,8 @@ def myfridge():
 def submit():
     form = RecipeForm()
     if form.validate_on_submit():
-            recipe = Recipe(title = form.title.data, body = form.step.data, diet = form.hasDiet.data, spiceLevel = form.spiceLevel.data, user_id = current_user.id)
-            db.session.add(recipe)
-            db.session.commit()
+            recipe = Recipes(title = form.title.data, body = form.step.data, diet = form.hasDiet.data, spiceLevel = form.spiceLevel.data, user_id = current_user.id)
+            return redirect(url_for('main.recipeingredientssearch', recipes=recipe))
     return render_template('recipe.html', title='Add a Recipe', form=form)
 
 @bp.route("/popular")
@@ -52,13 +51,15 @@ def edit_profile():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
+        current_user.diet = form.diet.data
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash('Changes successfully made!')
-        return redirect(url_for('main.edit_profile'))
+        return redirect(url_for('main.user', username=current_user.username))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
+        form.diet.data = current_user.diet
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
 @bp.route('/addingredientstest', methods=['GET', 'POST'])
@@ -91,18 +92,41 @@ def search():
                            next_url=next_url, prev_url=prev_url)
 
 @bp.route('/addingredients')
-def addingredients():
-    if g.search_form.validate():
-        if not current_app.elasticsearch:
-            return redirect(url_for('main.home'))
-        else:
-            return redirect(url_for('addingredientstest.html'))
+def addyouringredients():
     if not g.search_form.validate():
-        page = request.args.get('page', 1, type = int)
-        ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
-        next_url = url_for('main.addingredients', q=g.search_form.q.data, page=page + 1) \
-            if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
-        prev_url = url_for('main.addingredients', q=g.search_form.q.data, page=page - 1) \
-            if page > 1 else None
-        return render_template('addingredients.html', title='Add Ingredients', ingredient=ingredient,
-                            next_url=next_url, prev_url=prev_url)
+            return redirect(url_for('main.home'))
+    page = request.args.get('page', 1, type = int)
+    ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
+    next_url = url_for('main.addingredients', q=g.search_form.q.data, page=page + 1) \
+        if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
+    prev_url = url_for('main.addingredients', q=g.search_form.q.data, page=page - 1) \
+        if page > 1 else None
+    return render_template('addingredients.html', title='Add Ingredients', ingredient=ingredient,
+                        next_url=next_url, prev_url=prev_url)
+
+@bp.route('/added')
+def add(ingredient):
+    fridgenew = Fridges(quantity = 1)
+    fridgenew.currentingredients.append(ingredient)
+    current_user.fridge.append(fridgenew)
+    db.session.commit()
+    return redirect(url_for('main.myfridge'))
+
+@bp.route('/recipeingredientssearch')
+def recipeingredientssearch():
+    recipes = request.args.get('recipes', None)
+    return render_template('recipeingredientssearch.html', title='Add Ingredients to Your Recipe', recipes=recipes)
+
+@bp.route('/addingredientstorecipe')
+def addingredientstorecipe():
+    recipes = request.args.get('recipes', None)
+    if not g.search_form.validate():
+            return redirect(url_for('main.home'))
+    page = request.args.get('page', 1, type = int)
+    ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
+    next_url = url_for('main.addingredientstorecipe', q=g.search_form.q.data, page=page + 1) \
+        if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
+    prev_url = url_for('main.addingredientstorecipe', q=g.search_form.q.data, page=page - 1) \
+        if page > 1 else None
+    return render_template('addingredientstorecipe.html', title='Add Ingredients', ingredient=ingredient,
+                        next_url=next_url, prev_url=prev_url, recipes = recipes)

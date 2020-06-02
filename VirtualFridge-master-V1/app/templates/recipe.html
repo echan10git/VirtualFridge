@@ -15,33 +15,6 @@
             <span style = "color: red;"></span>[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p> <h3><b>Ingredients</b></h3> </p>
-        <ul class="ingredientsList" style="list-style-type: none;">
-            <li id="ingredient1">
-            {{ form.ingredient.label }}
-            {{ form.ingredient(size = 20) }}
-            {% for error in form.ingredient.errors%}
-            <span style = "color: red;"></span>[{{ error }}]</span>
-            {% endfor %}
-            {{ form.amount.label }}
-            {{ form.amount(size = 10) }}
-            {% for error in form.amount.errors%} <br>
-            <span style = "color: red;"></span>[{{ error }}]</span>
-            {% endfor %}
-            </li>
-        </ul>
-        <button onclick="addIngredient()">Add Ingredient</button>
-        {% block javascript %}
-        <script>
-            function addIngredient() {
-                let list = document.querySelector('.ingredientsList');
-                let clone = list.firstElementChild.cloneNode(true);
-                clone.childNodes[3].value = "";
-                clone.childNodes[7].value = "";
-                list.appendChild(clone);
-            }
-        </script>
-        {% endblock %}
         <p> <h3><b>Steps</b></h3> </p>
         <p>
             {{ form.step(cols=50, rows=4) }}<br>
