@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<br>
+<br>
+<br>
+<div>
+<center>
+    <h1> Add Your Own Recipe! </h1>
+    <form action="/submit" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            <h3>{{ form.title.label }}</h3>
+            {{ form.title(size=32) }}<br>
+            {% for error in form.title.errors%}
+            <span style = "color: red;"></span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p> <h3><b>Steps</b></h3> </p>
+        <p>
+            {{ form.step(cols=50, rows=4) }}<br>
+            {% for error in form.step.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.hasDiet.label }}
+            {{ form.hasDiet(size=10) }} <br>
+            {% for error in form.hasDiet.errors%}
+            <span style = "color: red;"></span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.spiceLevel.label }}
+            {{ form.spiceLevel(size=1) }}
+            {% for error in form.spiceLevel.errors%}
+            <span style = "color: red;"></span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p> {{ form.submit() }} </p>
+    </form>
+</center>
+</div>
+{% endblock %}

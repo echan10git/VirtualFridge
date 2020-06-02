@@ -2,40 +2,48 @@
 <html>
 
 <head>
-        <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="http://localhost:5000/static/base.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:5000/static/base.css">
     {% if title %}
     <title>Virtual Fridge - {{ title }}</title>
     {% else %}
     <title>Virtual Fridge</title>
     {% endif %}
-
-
+    <link rel="shortcut icon" href="https://freeimage.host/i/JO90ZX"> </img>
+    <style>
+        body{
+            background-image: url('https://iili.io/JOH0HQ.png')
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
 </head>
+
 <body class="standard-bg {% block style %} {% endblock style %}">
     <header>
     <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top">
         <div class ="container-fluid">
-            <a class="navbar-brand" href="#">Virtual Fridge</a>
+            <a class = "navbar-brand"> Virtual Fridge </a>
+            <img class="navbar-brand" src="https://iili.io/JO90ZX.png" alt="JO90ZX.png" border="0" style="height: 50px; width: 50px;"/> </img>
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('myfridge') }}">My Fridge</a></li>
-                <li><a href="{{ url_for('search') }}">Search</a></li>
-                <li><a href="{{ url_for('submit') }}">Submit</a></li>
-                <li><a href="{{ url_for('popular') }}">Popular</a></li>
-                <li><a href="{{ url_for('help') }}">Help</a></li>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.myfridge') }}">My Fridge</a></li>
+                <li><a href="{{ url_for('main.recipe_search') }}">Search</a></li>
+                <li><a href="{{ url_for('main.submit') }}">Submit</a></li>
+                <li><a href="{{ url_for('main.popular') }}">Popular</a></li>
+                <li><a href="{{ url_for('main.help') }}">Help</a></li>
             </ul>
-            <ul class ="nav navbar-nav navbar-right">
-                  <li>
-                    {% if false %}
-                      <a href="#"><span class="glyphicon glyphicon-user"></span> Username </a>
-                        {% else %}
-                        <a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-user"></span> Login </a>
-                        {% endif %}
-                    </li>
-    </ul>
+            {% if current_user.is_anonymous %}
+                <ul class ="nav navbar-nav navbar-right">
+                    <li> <a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login </a> </li>
+                </ul>
+            {% else %}
+                <ul class ="nav navbar-nav navbar-right">
+                    <li> <a href="{{ url_for('main.user', username=current_user.username) }}"><span class="glyphicon glyphicon-user"></span> {{ current_user.username }} </a> </li>
+                    <li> <a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>
+                </ul>
+            {% endif %}
   </div>
 </nav>
 </header>

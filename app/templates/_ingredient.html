@@ -1,0 +1,11 @@
+<table class="table table-hover">
+    <tr>
+        <td>
+            <span id="ingredient{{ ingredient.id }}">
+                {{ ingredients.knownIngredients }}
+                <br>
+            <button name="addBtn" onclick="{{ url_for(main.add, ingredient=ingredients) }}">Add</button>
+            </span>
+        </td>
+    </tr>
+</table>

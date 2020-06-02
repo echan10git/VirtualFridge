@@ -1,25 +1,26 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<div class="container-fluid barcode-text">
-    <h2>Bought Some New Items?</h2>
-    <h4 style="text-align: center">Scan them in with our barcode<br>scanner.</h4>
-    <a href="#" class="btn btn-primary btn-lg active scanner-button" role="button" aria-pressed="true">Go to Scanner</a>
+
+<div class="welcome-text"> 
+    <img src="https://iili.io/JO90ZX.png" alt="JO90ZX.png" border="0" style="height: 100px; width: 100px;"/> </img>
+    <h1><b>Welcome to VirtualFridge!</b></h1>
+    <h4>
+        With this website, you can easily keep track of your food and find amazing recipes! <br>
+    </h4>
+    <h4>
+        Need help working your way around our website? Click <a href="url_for('help.html')">here</a> to learn more. 
+    </h4> 
+    <h4> 
+        Already have an account and ready to explore more? 
+        <br>
+        <br>
+        <a href="{{ url_for('main.myfridge') }}" class="btn btn-primary btn-lg active scanner-button" role="button" aria-pressed="true">Add an Ingredient</a> 
+        or 
+        <a href="{{ url_for('main.recipe_search') }}" class="btn btn-primary btn-lg active scanner-button" role="button" aria-pressed="true">Find a Recipe</a>
+    </h4>
+    <br> 
+    <h4> If you have any comments, concerns, or suggestions, email us at virtualfridge4@gmail.com and we will respond to you in a snap.</h4>
 </div>
-<div class="container-fluid barcode-under-text">
-    <h4>New Recipes</h4>
-    <div class="row">
-        <div class="home-columns">
-           <h2>Column 1</h2>
-          <p>Some text..</p>
-        </div>
-        <div class="home-columns">
-            <h2>Column 2</h2>
-            <p>Some text..</p>
-        </div>
-        <div class="home-columns">
-            <h2>Column 3</h2>
-            <p>Some text..</p>
-        </div>
-    </div>
-</div>
+
 {% endblock content %}

@@ -1,0 +1,98 @@
+2020-05-24 19:01:56,490 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-24 19:02:07,952 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-24 19:02:14,120 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-24 19:02:31,032 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:25:26,866 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:38:44,304 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:42:39,810 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:44:54,028 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:45:37,365 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:45:41,802 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:45:48,852 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 17:45:56,266 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-new\app\__init__.py:70]
+2020-05-27 19:29:51,539 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 17:03:37,332 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 17:03:41,569 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 17:03:41,569 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 17:11:59,652 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 17:12:11,999 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 17:12:11,999 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 18:36:43,054 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-30 18:36:56,813 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-31 23:19:50,322 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-31 23:20:19,309 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-05-31 23:20:19,309 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-01 16:19:22,611 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-01 16:19:24,165 ERROR: Exception on / [GET] [in c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py:1890]
+Traceback (most recent call last):
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\base.py", line 1247, in _execute_context
+    self.dialect.do_execute(
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: user.diet
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\main\routes.py", line 16, in landing_page
+    return render_template('landing_page.html', title='Landing Page')
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\templating.py", line 136, in render_template
+    ctx.app.update_template_context(context)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 838, in update_template_context
+    context.update(func())
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask_login\utils.py", line 379, in _user_context_processor
+    return dict(current_user=_get_user())
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask_login\utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask_login\login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\models.py", line 87, in load_user
+    return User.query.get(int(id))
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\query.py", line 1004, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\query.py", line 1121, in _get_impl
+    return db_load_fn(self, primary_key_identity)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\loading.py", line 287, in load_on_pk_identity
+    return q.one()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\query.py", line 3360, in one
+    ret = self.one_or_none()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\query.py", line 3329, in one_or_none
+    ret = list(self)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\query.py", line 3405, in __iter__
+    return self._execute_and_instances(context)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\orm\query.py", line 3430, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\base.py", line 984, in execute
+    return meth(self, multiparams, params)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\sql\elements.py", line 293, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\base.py", line 1097, in _execute_clauseelement
+    ret = self._execute_context(
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\base.py", line 1287, in _execute_context
+    self._handle_dbapi_exception(
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\base.py", line 1481, in _handle_dbapi_exception
+    util.raise_(
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\base.py", line 1247, in _execute_context
+    self.dialect.do_execute(
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\sqlalchemy\engine\default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.diet
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.about_me AS user_about_me, user.diet AS user_diet, user.password_hash AS user_password_hash 
+FROM user 
+WHERE user.id = ?]
+[parameters: (2,)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
