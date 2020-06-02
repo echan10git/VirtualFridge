@@ -1,6 +1,9 @@
+.navbar {
+    min-height: 100px;
+}
 .navbar-custom {
-    background-color: #00dbf8;
-    color: #ffffff; 
+    background-color: #ffffff;
+    color: #ff0000; 
     border-color: #0575e6;
 }
 .search-bar {
@@ -18,7 +21,7 @@
 }
 
 .grad {
-  background-image: linear-gradient(to right, #00f260 , #0575e6);
+  background-image: url('https://iili.io/JOH0HQ.png');
   height: inherit;
 }
 
@@ -66,12 +69,12 @@
     padding-top: 5%;
 }
 
-.white-text{
+/*.white-text{
     color: white;
-}
+}*/
 
 .register-button{
-    background-color: #9f32b2!important;
+    background-color: #36b232!important;
     padding: 20px 20px;
 }
 
