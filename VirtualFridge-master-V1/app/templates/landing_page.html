@@ -1,21 +1,16 @@
 {% extends "layout.html" %}
-
+{% block style %}
+grad
+{% endblock style %}
 {% block content %}
-
-<body style="font-family: 'Quicksand', sans-serif;">
-<div class="container-fluid welcome-text">
-    <h1><b>Ingredients You Own, Recipes You'll Love</b></h1>
-    <h3>
-        <b>
-            Professional and User-Submitted<br>
-            Recipes to Fit Any Diet
-        </b>
+<div class="container-fluid welcome-text white-text grad">
+    <h1>Ingredients You Own, Recipes You'll Love</h1>
+    <h3>Professional and User-Submitted<br>
+        Recipes to Fit Any Diet
     </h3>
     <br>
     <a href="{{url_for('auth.registration')}}" class="btn btn-primary btn-lg active register-button" role="button" aria-pressed="true">Create Your Account Today!</a>
-    <h3> <b>OR</b> </h3>
+    <h3> OR </h3>
     <a href="{{url_for('auth.login')}}" class="btn btn-primary btn-lg active register-button" role="button" aria-pressed="true">Go to My Account Now!</a>
 </div>
-</body> 
-
 {% endblock content %}
