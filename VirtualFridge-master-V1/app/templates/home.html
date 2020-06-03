@@ -2,7 +2,6 @@
 
 {% block content %}
 
-<body style="font-family: 'Quicksand', sans-serif;">
 <div class="welcome-text"> 
     <img src="https://iili.io/JO90ZX.png" alt="JO90ZX.png" border="0" style="height: 100px; width: 100px;"/> </img>
     <h1><b>Welcome to VirtualFridge!</b></h1>
@@ -10,7 +9,7 @@
         With this website, you can easily keep track of your food and find amazing recipes! <br>
     </h4>
     <h4>
-        Need help working your way around our website? Click <a href="{{url_for('main.help')}}">here</a> to learn more. 
+        Need help working your way around our website? Click <a href="url_for('help.html')">here</a> to learn more. 
     </h4> 
     <h4> 
         Already have an account and ready to explore more? 
@@ -21,8 +20,7 @@
         <a href="{{ url_for('main.recipe_search') }}" class="btn btn-primary btn-lg active scanner-button" role="button" aria-pressed="true">Find a Recipe</a>
     </h4>
     <br> 
+    <h4> If you have any comments, concerns, or suggestions, email us at virtualfridge4@gmail.com and we will respond to you in a snap.</h4>
 </div>
-<center> <h4 style="position:fixed;bottom:0;width:100%; display:block;"> If you have any comments, concerns, or suggestions, email us at virtualfridge4@gmail.com and we will respond to you in a snap.</h4> </center>  
-</body>
 
 {% endblock content %}

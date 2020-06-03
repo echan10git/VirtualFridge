@@ -12,9 +12,22 @@
         </div>
     </form>
     {% endif %}
+    <h2>My Items</h2>
     {% for fridges in current_user.fridge %}
         {% for ingredients in fridges.currentingredients %}
-            {{ ingredients.knownIngredients }}
+            <table class="table table-hover">
+                <tr>
+                    <td>
+                        <span id="fridges{{ fridges.id }}">
+                            {{ ingredients.knownIngredients }}
+                            <a href="{{ url_for('main.addquantity', fridgesid = fridges.id) }}"><input type="button" value="Add"></a>
+                            <a href="{{ url_for('main.removequantity', fridgesid = fridges.id) }}"><input type="button" value="Remove"></a>
+                            <br>
+                            {{ fridges.quantity }}
+                        </span>
+                    </td>
+                </tr>
+            </table>
         {% endfor %}
     {% endfor %}
 </div>

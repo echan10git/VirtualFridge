@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="username-text">
+    <table>
+        <tr>
+            <td><h1>Author: {{ recipe.author.username }}</h1></td>
+        </tr>
+        <tr>
+            <td><center><img src="{{ recipe.author.avatar(150) }}"></center></td>
+            <td>
+                Title: {{ recipe.title }}<br>
+                Ingredients:<br>                    
+                {% for recipeingredients in recipe.ingredientsinrecipe %}
+                    {% for ingredients in recipeingredients.usedingredients %}
+                        {{ recipeingredients.quantity }} {{ recipeingredients.units }} {{ ingredients.knownIngredients }}
+                        <br>
+                    {% endfor %}
+                {% endfor %}
+            </td>
+            <td>
+                Spice level: {{ recipe.spiceLevel }}
+            </td>
+        </tr>
+        <tr> 
+            <td> 
+                <br>
+                <center>
+                    {{ recipe.body }}
+                </center>
+            </td>
+        </tr>
+    </table>
+    <br>
+</div>
+    <hr>
+    <p>
+<!--         show recipes they have submitted -->
+    </p>
+{% endblock content %}

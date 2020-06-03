@@ -1,5 +1,8 @@
+.results{
+    padding-top: 4%;
+}
 .navbar {
-    min-height: 100px;
+    min-height: 50px;
 }
 .navbar-custom {
     background-color: #ffffff;

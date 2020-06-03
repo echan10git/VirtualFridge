@@ -1,8 +1,7 @@
-{% extends "layout.html" %}
-{% block content %}
    <table class="table table-hover">
         <tr>
             <td width="70px">
+                <a href="{{ url_for('main.user', username=recipes.author.username) }}">{{ recipes.author.username }}</a>
                 <a href="{{ url_for('main.user', username=recipes.author.username) }}">
                     <img src="{{ recipes.author.avatar(70) }}" />
                 </a>
@@ -15,10 +14,15 @@
                 {% endset %}
                 <br>
                 <span id="recipes{{ recipes.id }}">
-                    {{ recipes.title }} <br>
-                    {{ recipes.body }}</span>
+                    <a href = "{{ url_for('main.recipe', recipeid = recipes.id) }}">{{ recipes.title }}</a> <br>
+                    {% for recipeingredients in recipes.ingredientsinrecipe %}
+                        {% for ingredients in recipeingredients.usedingredients %}
+                            {{ recipeingredients.quantity }} {{ recipeingredients.units }} {{ ingredients.knownIngredients }}
+                            <br>
+                        {% endfor %}
+                    {% endfor %}
+                    </span>
                 <br><br>
-                {% endif %}
             </td>
         </tr>
     </table>

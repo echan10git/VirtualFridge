@@ -28,19 +28,6 @@ def recipe_search():
 def myfridge():
     return render_template('myfridge.html', title='My Fridge')
 
-@bp.route("/submit", methods=['GET', 'POST'])
-@login_required
-def submit():
-    form = RecipeForm()
-    if form.validate_on_submit():
-            recipe = Recipes(title = form.title.data, body = form.step.data, diet = form.hasDiet.data, spiceLevel = form.spiceLevel.data, user_id = current_user.id)
-            return redirect(url_for('main.recipeingredientssearch', recipes=recipe))
-    return render_template('recipe.html', title='Add a Recipe', form=form)
-
-@bp.route("/popular")
-def popular():
-    return render_template('popular.html', title='Popular')
-
 @bp.route("/help")
 def help():
     return render_template('help.html', title='Help')
@@ -104,29 +91,94 @@ def addyouringredients():
     return render_template('addingredients.html', title='Add Ingredients', ingredient=ingredient,
                         next_url=next_url, prev_url=prev_url)
 
-@bp.route('/added')
-def add(ingredient):
+@bp.route('/added/<int:ingredientsid>')
+def add(ingredientsid):
+    ingredient = Ingredients.query.get(ingredientsid)
     fridgenew = Fridges(quantity = 1)
     fridgenew.currentingredients.append(ingredient)
     current_user.fridge.append(fridgenew)
     db.session.commit()
     return redirect(url_for('main.myfridge'))
 
-@bp.route('/recipeingredientssearch')
-def recipeingredientssearch():
-    recipes = request.args.get('recipes', None)
-    return render_template('recipeingredientssearch.html', title='Add Ingredients to Your Recipe', recipes=recipes)
+@bp.route("/submit", methods=['GET', 'POST'])
+@login_required
+def submit():
+    form = RecipeForm()
+    if form.validate_on_submit():
+            recipe = Recipes(title = form.title.data, body = form.step.data, diet = form.hasDiet.data, spiceLevel = form.spiceLevel.data, popularity = 0, user_id = current_user.id)
+            current_user.recipe.append(recipe)
+            db.session.commit()
+            return redirect(url_for('main.recipeingredientssearch', recipesid=recipe.id))
+    return render_template('recipe.html', title='Add a Recipe', form=form)
 
-@bp.route('/addingredientstorecipe')
-def addingredientstorecipe():
-    recipes = request.args.get('recipes', None)
+@bp.route('/recipeingredientssearch/<int:recipesid>')
+def recipeingredientssearch(recipesid):
+    recipes = Recipes.query.get(recipesid)
+    return render_template('recipeingredientssearch.html', title='Add Ingredients to Your Recipe', recipesid=recipesid, recipes = recipes)
+
+@bp.route('/addingredientstorecipe/<int:recipesid>')
+def addingredientstorecipe(recipesid):
     if not g.search_form.validate():
             return redirect(url_for('main.home'))
     page = request.args.get('page', 1, type = int)
     ingredient, total = Ingredients.search(g.search_form.q.data, page, current_app.config['INGREDIENTS_PER_PAGE'])
-    next_url = url_for('main.addingredientstorecipe', q=g.search_form.q.data, page=page + 1) \
+    next_url = url_for('main.addingredientstorecipe', q=g.search_form.q.data, page=page + 1, recipesid = recipesid) \
         if total > page * current_app.config['INGREDIENTS_PER_PAGE'] else None
-    prev_url = url_for('main.addingredientstorecipe', q=g.search_form.q.data, page=page - 1) \
+    prev_url = url_for('main.addingredientstorecipe', q=g.search_form.q.data, page=page - 1, recipesid = recipesid) \
         if page > 1 else None
     return render_template('addingredientstorecipe.html', title='Add Ingredients', ingredient=ingredient,
-                        next_url=next_url, prev_url=prev_url, recipes = recipes)
+                        next_url=next_url, prev_url=prev_url, recipesid = recipesid)
+
+@bp.route('/addquantityrecipes/<int:recipesid>/<int:recipeingredientsid>/<int:ingredientsid>')
+def addquantityrecipe(recipesid, recipeingredientsid, ingredientsid):
+    recipeingredient = RecipeIngredients.query.filter(RecipeIngredients.id == recipeingredientsid)
+    recipeingredient.first().quantity = recipeingredient.first().quantity + 1
+    db.session.commit()
+    return redirect(url_for('main.recipeingredientssearch', recipesid=recipesid))
+
+@bp.route('/removequantityrecipes//<int:recipesid>/<int:recipeingredientsid>/<int:ingredientsid>')
+def removequantityrecipe(recipesid, recipeingredientsid, ingredientsid):
+    recipeingredient = RecipeIngredients.query.filter(RecipeIngredients.id == recipeingredientsid)
+    recipeingredient.first().quantity = recipeingredient.first().quantity - 1
+    if recipeingredient.first().quantity <= 0:
+        Link.query.filter_by(recipeingredients_id = recipeingredientsid).delete()
+        RecipeIngredients.query.filter(RecipeIngredients.id == recipeingredientsid).delete()
+    db.session.flush()
+    db.session.commit()
+    return redirect(url_for('main.recipeingredientssearch', recipesid=recipesid))
+
+@bp.route('/addedtorecipe/<int:ingredientsid>/<int:recipesid>')
+def addedtorecipe(ingredientsid, recipesid):
+    ingredient = Ingredients.query.get(ingredientsid)
+    recipes = Recipes.query.get(recipesid)
+    ingredientnew = RecipeIngredients(quantity = 1, units = 'grams')
+    ingredientnew.usedingredients.append(ingredient)
+    recipes.ingredientsinrecipe.append(ingredientnew)
+    db.session.commit()
+    return redirect(url_for('main.recipeingredientssearch', recipesid = recipesid))
+
+@bp.route('/recipe/<recipeid>')
+@login_required
+def recipe(recipeid):
+    recipe = Recipes.query.filter(Recipes.id==recipeid).first_or_404()
+    if current_user.id != recipe.author.id:
+        recipe.popularity = recipe.popularity + 1
+    return render_template('recipeview.html', recipe=recipe)
+
+@bp.route('/addquantity/<int:fridgesid>')
+def addquantity(fridgesid):
+    fridge = Fridges.query.get(fridgesid)
+    fridge.quantity = fridge.quantity + 1
+    db.session.commit()
+    return redirect(url_for('main.myfridge'))
+
+@bp.route('/removequantity/<int:fridgesid>')
+def removequantity(fridgesid):
+    fridge = Fridges.query.get(fridgesid)
+    fridge.quantity = fridge.quantity - 1
+    if fridge.quantity <= 0:
+        Linktwo.query.filter_by(fridges_id = fridgesid).delete()
+        Fridges.query.filter(Fridges.id == fridgesid).delete()
+    db.session.flush()
+    db.session.commit()
+    return redirect(url_for('main.myfridge'))
