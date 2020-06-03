@@ -38,3 +38,22 @@ TypeError: 'dict' object is not callable
 2020-06-03 02:58:53,025 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
 2020-06-03 02:58:56,375 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
 2020-06-03 02:58:56,375 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-03 14:26:18,772 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-03 14:44:51,128 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-03 14:44:56,104 ERROR: Exception on /search [GET] [in c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py:1890]
+Traceback (most recent call last):
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\tyco1\appdata\local\programs\python\python38-32\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\main\routes.py", line 76, in search
+    r = recipeingredients.usedingredients.first().knownIngredients.id
+AttributeError: 'InstrumentedList' object has no attribute 'first'
