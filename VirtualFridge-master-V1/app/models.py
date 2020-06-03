@@ -102,9 +102,6 @@ class Fridges(db.Model):
         return self.currentingredients.filter(link.c.ingredients_id == ingredients.id).count() > 0
     def _repr_(self):
         return '<Fridges {}>'.format(self.ingredient)
-    def append(self, item):
-         if item not in self:
-            self.data.append(item)
 
 class Recipes(SearchableMixin, db.Model):
     __searchable__ = ['title']
@@ -114,9 +111,8 @@ class Recipes(SearchableMixin, db.Model):
     body = db.Column(db.Text)
     diet = db.Column(db.String(140))
     spiceLevel = db.Column(db.Integer)
-    popularity = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    ingredientsinrecipe = db.relationship('RecipeIngredients', backref='recipeorigin', lazy = 'dynamic')
+    RecipeIngredient = db.relationship('RecipeIngredients', backref='recipeorigin', lazy = 'dynamic')
     def showingredients(self):
         return self.query.join(link, (self.id == RecipeIngredients.recipe_id)).filter(
             Link.c.recipeingredients_id == RecipeIngredients.recipe_id).order_by(
@@ -125,7 +121,7 @@ class Recipes(SearchableMixin, db.Model):
 class RecipeIngredients(db.Model):
     __tablename__ = 'recipeingredients'
     id = db.Column(db.Integer, primary_key = True)
-    quantity = db.Column(db.Integer)
+    quantity = db.Column(db.Numeric)
     units = db.Column(db.String(140))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
     usedingredients = db.relationship('Ingredients', secondary='link')
@@ -140,7 +136,7 @@ class RecipeIngredients(db.Model):
 
 class Ingredients(SearchableMixin, db.Model):
     __searchable__ = ['knownIngredients']
-    __tablename__ = 'ingredients' 
+    __tablename__ = 'ingredients'
     id = db.Column(db.Integer, primary_key = True)
     knownIngredients = db.Column(db.String(64), index=True, unique=True)
     recipeingredient = db.relationship('RecipeIngredients', secondary='link')
