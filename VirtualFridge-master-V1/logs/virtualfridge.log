@@ -35,3 +35,6 @@ Traceback (most recent call last):
 TypeError: 'dict' object is not callable
 2020-06-01 16:28:52,861 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
 2020-06-01 16:31:13,185 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-03 02:58:53,025 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-03 02:58:56,375 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
+2020-06-03 02:58:56,375 INFO: Virtualfridge startup [in C:\Users\tyco1\Desktop\VirtualFridge-master-V1\app\__init__.py:70]
