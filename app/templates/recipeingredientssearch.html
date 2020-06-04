@@ -5,12 +5,30 @@
     <h2 class="recipe-search">Ingredient Search</h2>
     {% if g.search_form %}
     <form class="navbar-form navbar-left search-bar" method="get"
-            action="{{ url_for('main.addingredientstorecipe', recipes=recipes) }}">
+            action="{{ url_for('main.addingredientstorecipe', recipesid=recipesid) }}">
         <div class="form-group">
             {{ g.search_form.q(size=20, class='form-control',
                     placeholder=g.search_form.q.label.text) }}
         </div>
     </form>
     {% endif %}
+    {% for recipeingredients in recipes.ingredientsinrecipe %}
+        {% for ingredients in recipeingredients.usedingredients %}
+            <table class="table table-hover">
+                <tr>
+                    <td>
+                        <span id="recipes{{ recipes.id }}">
+                            {{ ingredients.knownIngredients }}
+                            <a href="{{ url_for('main.addquantityrecipe', recipesid = recipes.id, recipeingredientsid = recipeingredients.id, ingredientsid = ingredients.id) }}"><input type="button" value="Add"></a>
+                            <a href="{{ url_for('main.removequantityrecipe', recipesid = recipes.id, recipeingredientsid = recipeingredients.id, ingredientsid = ingredients.id) }}"><input type="button" value="Remove"></a>
+                            <br>
+                            {{ recipeingredients.quantity }} {{ recipeingredients.units }}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    {% endfor %}
+    <a href="{{ url_for('main.submit') }}"><input type="button" value="Done"></a>
 </div>
 {% endblock content %}

@@ -26,14 +26,13 @@
     <header>
     <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top">
         <div class ="container-fluid">
-            <a href="{{ url_for('main.home') }}" class = "navbar-brand"> Virtual Fridge </a>
+            <a class = "navbar-brand"> Virtual Fridge </a>
             <img class="navbar-brand" src="https://iili.io/JO90ZX.png" alt="JO90ZX.png" border="0" style="height: 50px; width: 50px;"/> </img>
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.home') }}">Home</a></li>
                 <li><a href="{{ url_for('main.myfridge') }}">My Fridge</a></li>
                 <li><a href="{{ url_for('main.recipe_search') }}">Search</a></li>
                 <li><a href="{{ url_for('main.submit') }}">Submit</a></li>
-                <li><a href="{{ url_for('main.popular') }}">Popular</a></li>
                 <li><a href="{{ url_for('main.help') }}">Help</a></li>
             </ul>
             {% if current_user.is_anonymous %}

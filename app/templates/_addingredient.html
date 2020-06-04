@@ -4,7 +4,7 @@
             <span id="ingredients{{ ingredients.id }}">
                 {{ ingredients.knownIngredients }}
                 <br>
-            <a href="{{ url_for('main.add', ingredientsid = ingredients.id) }}"><input type="button" value="Add"></a>
+            <a href="{{ url_for('main.addedtorecipe', ingredientsid = ingredients.id, recipesid=recipesid) }}"><input type="button" value="Add"></a>
             </span>
         </td>
     </tr>

@@ -6,6 +6,10 @@
     {% for ingredients in ingredient %}
         {% include '_ingredient.html' %}
     {% endfor %}
+    <div> 
+        Your ingredient not here? <br> 
+        <a href="{{ url_for('main.addingredientstest') }}"> Add it here! </a>
+    </div>
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">

@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="results">
+<div class="welcome-text">
     <h1>Search Results</h1>
-    {% for recipes in recipe %}
-        {% include '_recipe.html' %}
+    {% for ingredients in ingredient %}
+        {% include '_addingredient.html' %}
     {% endfor %}
     <nav aria-label="...">
         <ul class="pager">
