@@ -32,7 +32,7 @@ lxml==4.5.0
 Mako==1.1.2
 MarkupSafe==1.1.1
 moviepy==1.0.3
-numpy==1.18.4
+numpy==1.22.0
 parsel==1.6.0
 Pillow==7.1.2
 proglog==0.1.9
