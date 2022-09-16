@@ -29,7 +29,7 @@ instaloader==4.3
 itsdangerous==1.1.0
 Jinja2==2.11.1
 lxml==4.5.0
-Mako==1.1.2
+Mako==1.2.2
 MarkupSafe==1.1.1
 moviepy==1.0.3
 numpy==1.18.4
